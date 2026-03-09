@@ -1,28 +1,49 @@
+import java.util.Deque;
+import java.util.ArrayDeque;
 import java.util.Scanner;
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
 
-        // Take input from user
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter a string to check if it is a palindrome:");
-        String original = scanner.nextLine();
+        Scanner sc = new Scanner(System.in);
 
-        // Reverse the string using loop
-        String reversed = "";
+        System.out.println("=== Palindrome Checker using Deque ===");
+        System.out.print("Enter a string: ");
 
-        for (int i = original.length() - 1; i >= 0; i--) {
-            reversed = reversed + original.charAt(i);
+        String input = sc.nextLine();
+
+        // Convert string to lowercase and remove spaces
+        input = input.replaceAll("\\s+", "").toLowerCase();
+
+        // Create a deque
+        Deque<Character> deque = new ArrayDeque<>();
+
+        // Insert characters into deque
+        for (char ch : input.toCharArray()) {
+            deque.addLast(ch);
         }
 
-        // Compare original and reversed string
-        if (original.equals(reversed)) {
-            System.out.println(original + " is a Palindrome");
+        boolean isPalindrome = true;
+
+        // Compare front and rear elements
+        while (deque.size() > 1) {
+
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
+
+            if (front != rear) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        // Display result
+        if (isPalindrome) {
+            System.out.println("The string is a Palindrome.");
         } else {
-            System.out.println(original + " is not a Palindrome");
+            System.out.println("The string is NOT a Palindrome.");
         }
 
-        // Close scanner
-        scanner.close();
+        sc.close();
     }
 }
 
