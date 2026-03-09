@@ -1,45 +1,48 @@
 import java.util.Scanner;
-public class PalindromeCheckerApp {
-    public static void main(String[] args) {
-        public static boolean isPalindrome(String str) {
+class PalindromeChecker {
 
-            int start = 0;
-            int end = str.length() - 1;
+    // Method to check palindrome
+    public boolean checkPalindrome(String str) {
 
-            while (start < end) {
+        str = str.replaceAll("\\s+", "").toLowerCase();
 
-                if (str.charAt(start) != str.charAt(end)) {
-                    return false;
-                }
+        int start = 0;
+        int end = str.length() - 1;
 
-                start++;
-                end--;
+        while (start < end) {
+
+            if (str.charAt(start) != str.charAt(end)) {
+                return false;
             }
 
-            return true;
+            start++;
+            end--;
         }
 
-        public static void main(String[] args) {
-
-            Scanner sc = new Scanner(System.in);
-
-            System.out.println("=== Palindrome Checker (Ignore Spaces & Case) ===");
-            System.out.print("Enter a string: ");
-
-            String input = sc.nextLine();
-
-            // Normalize string
-            input = input.replaceAll("\\s+", "").toLowerCase();
-
-            boolean result = isPalindrome(input);
-
-            if (result)
-                System.out.println("The string is a Palindrome.");
-            else
-                System.out.println("The string is NOT a Palindrome.");
-
-            sc.close();
-        }
+        return true;
     }
+}
+public class PalindromeCheckerApp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("=== Object-Oriented Palindrome Checker ===");
+        System.out.print("Enter a string: ");
+
+        String input = sc.nextLine();
+
+        // Create object of PalindromeChecker
+        PalindromeChecker checker = new PalindromeChecker();
+
+        boolean result = checker.checkPalindrome(input);
+
+        if (result)
+            System.out.println("The string is a Palindrome.");
+        else
+            System.out.println("The string is NOT a Palindrome.");
+
+        sc.close();
+    }
+}
 
 
