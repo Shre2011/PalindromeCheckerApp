@@ -1,98 +1,29 @@
 import java.util.Scanner;
-
-class Node {
-    char data;
-    Node next;
-
-    Node(char data) {
-        this.data = data;
-        this.next = null;
-    }
-}
 public class PalindromeCheckerApp {
-    public static Node reverse(Node head) {
-        Node prev = null;
-        Node current = head;
-        Node next = null;
-
-        while (current != null) {
-            next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;
-        }
-
-        return prev;
-    }
-
-    // Method to check palindrome
-    public static boolean isPalindrome(Node head) {
-
-        if (head == null || head.next == null)
-            return true;
-
-        Node slow = head;
-        Node fast = head;
-
-        // Find middle using fast & slow pointer
-        while (fast.next != null && fast.next.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        // Reverse second half
-        Node secondHalf = reverse(slow.next);
-
-        Node firstHalf = head;
-        Node temp = secondHalf;
-
-        // Compare two halves
-        while (temp != null) {
-            if (firstHalf.data != temp.data) {
-                return false;
-            }
-            firstHalf = firstHalf.next;
-            temp = temp.next;
-        }
-
-        return true;
-    }
-
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        // Take input from user
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a string to check if it is a palindrome:");
+        String original = scanner.nextLine();
 
-        System.out.println("=== Palindrome Checker using Linked List ===");
-        System.out.print("Enter a string: ");
+        // Reverse the string using loop
+        String reversed = "";
 
-        String input = sc.nextLine();
-        input = input.replaceAll("\\s+", "").toLowerCase();
-
-        Node head = null;
-        Node tail = null;
-
-        // Convert string to linked list
-        for (char ch : input.toCharArray()) {
-
-            Node newNode = new Node(ch);
-
-            if (head == null) {
-                head = newNode;
-                tail = newNode;
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-            }
+        for (int i = original.length() - 1; i >= 0; i--) {
+            reversed = reversed + original.charAt(i);
         }
 
-        // Check palindrome
-        boolean result = isPalindrome(head);
+        // Compare original and reversed string
+        if (original.equals(reversed)) {
+            System.out.println(original + " is a Palindrome");
+        } else {
+            System.out.println(original + " is not a Palindrome");
+        }
 
-        if (result)
-            System.out.println("The string is a Palindrome.");
-        else
-            System.out.println("The string is NOT a Palindrome.");
-
-        sc.close();
+        // Close scanner
+        scanner.close();
     }
 }
+
+
