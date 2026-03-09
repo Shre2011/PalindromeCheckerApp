@@ -1,22 +1,27 @@
 import java.util.Scanner;
+import java.util.Stack;
+
+// Palindrome service class
 class PalindromeChecker {
 
-    // Method to check palindrome
-    public boolean checkPalindrome(String str) {
+    public boolean checkPalindrome(String input) {
 
-        str = str.replaceAll("\\s+", "").toLowerCase();
+        // Normalize string (remove spaces and convert to lowercase)
+        input = input.replaceAll("\\s+", "").toLowerCase();
 
-        int start = 0;
-        int end = str.length() - 1;
+        Stack<Character> stack = new Stack<>();
 
-        while (start < end) {
+        // Push characters into stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
 
-            if (str.charAt(start) != str.charAt(end)) {
+        // Compare characters
+        for (char c : input.toCharArray()) {
+
+            if (c != stack.pop()) {
                 return false;
             }
-
-            start++;
-            end--;
         }
 
         return true;
@@ -24,9 +29,10 @@ class PalindromeChecker {
 }
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("=== Object-Oriented Palindrome Checker ===");
+        System.out.println("=== Final Palindrome Checker App ===");
         System.out.print("Enter a string: ");
 
         String input = sc.nextLine();
